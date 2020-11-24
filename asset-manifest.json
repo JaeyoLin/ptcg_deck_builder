@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ptcg_deck_builder/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/ptcg_deck_builder/static/js/main.d308ef17.chunk.js",
+    "main.js.map": "/ptcg_deck_builder/static/js/main.d308ef17.chunk.js.map",
+    "runtime-main.js": "/ptcg_deck_builder/static/js/runtime-main.ee45a26b.js",
+    "runtime-main.js.map": "/ptcg_deck_builder/static/js/runtime-main.ee45a26b.js.map",
+    "static/js/2.a82fa182.chunk.js": "/ptcg_deck_builder/static/js/2.a82fa182.chunk.js",
+    "static/js/2.a82fa182.chunk.js.map": "/ptcg_deck_builder/static/js/2.a82fa182.chunk.js.map",
+    "static/js/3.80781e41.chunk.js": "/ptcg_deck_builder/static/js/3.80781e41.chunk.js",
+    "static/js/3.80781e41.chunk.js.map": "/ptcg_deck_builder/static/js/3.80781e41.chunk.js.map",
+    "index.html": "/ptcg_deck_builder/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/ptcg_deck_builder/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.a82fa182.chunk.js.LICENSE.txt": "/ptcg_deck_builder/static/js/2.a82fa182.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/ptcg_deck_builder/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee45a26b.js",
+    "static/js/2.a82fa182.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.d308ef17.chunk.js"
+  ]
+}
