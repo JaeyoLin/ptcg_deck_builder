@@ -28,7 +28,18 @@ const useStyles = makeStyles((theme) => ({
 const CardSearch = (props) => {
   const classes = useStyles();
 
-  const { openDialog } = props;
+  const {
+    toogleDialog, // 打開/關閉 Card Detail
+    queryCondition, // 搜尋條件
+    handleChangeQuery, // 修改條件
+    clearQuery, // 清空查詢條件
+  } = props;
+
+  const {
+    set, // 彈數
+    type, // 種類
+    searchText, // 關鍵字
+  } = queryCondition;
 
   return (
     <div className={classes.container}>
@@ -37,13 +48,16 @@ const CardSearch = (props) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          // value={age}
-          // onChange={handleChange}
+          value={set}
+          onChange={(e) => {
+            handleChangeQuery('set', e.target.value);
+          }}
         >
+          <MenuItem value="">全部</MenuItem>
           {
-            Sets.map((set) => {
+            Object.keys(Sets).map((set) => {
               return (
-                <MenuItem value={set.value}>{set.key}</MenuItem>
+                <MenuItem key={Sets[set].key} value={Sets[set].value}>{`${Sets[set].key} - ${Sets[set].text}`}</MenuItem>
               );
             })
           }
@@ -54,28 +68,38 @@ const CardSearch = (props) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          // value={age}
-          // onChange={handleChange}
+          value={type}
+          onChange={(e) => {
+            handleChangeQuery('type', e.target.value);
+          }}
         >
+          <MenuItem value="">全部</MenuItem>
           {
-            CardTypes.map((type) => {
+            Object.keys(CardTypes).map((type) => {
               return (
-                <MenuItem value={type.value}>{type.key}</MenuItem>
+                <MenuItem key={CardTypes[type].key} value={CardTypes[type].value}>{CardTypes[type].text}</MenuItem>
               );
             })
           }
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <TextField id="standard-basic" label="關鍵字" />
+        <TextField
+          id="standard-basic"
+          label="關鍵字"
+          value={searchText}
+          onChange={(e) => {
+            handleChangeQuery('searchText', e.target.value);
+          }}
+        />
       </FormControl>
       <FormControl className={classes.formControl}>
-        <Button variant="contained" color="primary" onClick={openDialog}>
+        <Button variant="contained" color="primary" onClick={toogleDialog}>
           查詢
         </Button>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={clearQuery}>
           清除條件
         </Button>
       </FormControl>

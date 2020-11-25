@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -19,6 +19,12 @@ import { green, red } from '@material-ui/core/colors';
 import CardSearch from '../CardSearch';
 import Decker from '../Decker';
 
+import CARD_LIST from '../../CardList';
+
+/**
+ * useStyles
+ *
+ */
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -26,20 +32,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * DeckDashBoard
+ *
+ */
 const DeckDashBoard = () => {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
-  const [deckList, setDeckList] = React.useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9 , 10,
-  ]);
+  // 查詢條件
+  const [queryCondition, setQueryCondition] = React.useState({
+    set: '', // 彈數
+    type: '', // 種類
+    searchText: '', // 關鍵字
+  });
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [selectCard, setSelectCard] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [deckList, setDeckList] = React.useState([]);
+
+  /**
+   * toogleDialog
+   *
+   */
+  const toogleDialog = () => {
+    setOpen(!open);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  /**
+   * handleChangeQuery
+   * 更新查詢條件
+   *
+   * @param {*} key
+   * @param {*} value
+   */
+  const handleChangeQuery = (key, value) => {
+    setQueryCondition({
+      ...queryCondition,
+      [key]: value,
+    });
+  };
+
+  /**
+   * clearQuery
+   * 清空所有查詢條件
+   *
+   */
+  const clearQuery = () => {
+    setQueryCondition({
+      set: '', // 彈數
+      type: '', // 種類
+      searchText: '', // 關鍵字
+    });
   };
 
   return (
@@ -47,7 +90,10 @@ const DeckDashBoard = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4} md={3} lg={3}>
           <CardSearch
-            openDialog={handleClickOpen}
+            toogleDialog={toogleDialog}
+            queryCondition={queryCondition}
+            handleChangeQuery={handleChangeQuery}
+            clearQuery={clearQuery}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={9} lg={9}>
@@ -59,7 +105,7 @@ const DeckDashBoard = () => {
 
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={toogleDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -69,12 +115,18 @@ const DeckDashBoard = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value="1"
-              // onChange={handleChange}
+              value={selectCard}
+              onChange={(e) => {
+                setSelectCard(e.target.value);
+              }}
             >
-              <MenuItem value="1">噴火龍</MenuItem>
-              <MenuItem value="2">水劍龜</MenuItem>
-              <MenuItem value="3">妙娃花</MenuItem>
+              {
+                CARD_LIST.map((card) => {
+                  return (
+                    <MenuItem key={`${card.set}-${card.id}`} value={card}>{`${card.name}`}</MenuItem>
+                  );
+                })
+              }
             </Select>
           </FormControl>
           <div>
@@ -82,11 +134,17 @@ const DeckDashBoard = () => {
             <AddCircleIcon fontSize="large" style={{ color: green[500] }} />
           </div>
           <ChevronLeftIcon fontSize="large" />
-          <img src="https://ptcgcard.com/img/173.cb2d1b04.jpg" width="70%" />
+          {
+            (selectCard === null) ? (
+              <div>No Card</div>
+            ) : (
+              <img src={selectCard.imgSrc} width="70%" />
+            )
+          }
           <ChevronRightIcon fontSize="large" />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={toogleDialog} color="primary">
             關閉
           </Button>
         </DialogActions>

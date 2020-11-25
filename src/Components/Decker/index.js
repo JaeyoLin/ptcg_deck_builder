@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -32,6 +34,20 @@ const Decker = (props) => {
               </Grid>
             );
           })
+        }
+        {
+          (deckList.length === 0) && (
+            <Box my={2}>
+              <Typography
+                variant="h5"
+                color="initial"
+                align="center"
+                // style={{ height: '50px', color: '#000000' }}
+              >
+                { `目前牌組沒有卡片。` }
+              </Typography>
+            </Box>
+          )
         }
       </Grid>
     </div>
