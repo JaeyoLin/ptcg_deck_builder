@@ -1,3 +1,4 @@
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Decker
+ *
+ * @param {*} props
+ */
 const Decker = (props) => {
   const classes = useStyles();
   const { deckList } = props;
@@ -29,7 +35,7 @@ const Decker = (props) => {
             return (
               <Grid item xs={6} sm={4} md={3} lg={2}>
                 <div className={classes.card}>
-                  <img src="https://ptcgcard.com/img/173.cb2d1b04.jpg" width="100%" />
+                  <img src={card.imgSrc} width="100%" />
                 </div>
               </Grid>
             );

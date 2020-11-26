@@ -28,7 +28,7 @@ const App = (props) => {
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Typography variant="h6">Aaron Test</Typography>
+          <Typography variant="h6">PTCG 卡表產生器</Typography>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

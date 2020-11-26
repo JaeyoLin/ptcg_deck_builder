@@ -29,7 +29,7 @@ const CardSearch = (props) => {
   const classes = useStyles();
 
   const {
-    toogleDialog, // 打開/關閉 Card Detail
+    handelSearch, // 查詢
     queryCondition, // 搜尋條件
     handleChangeQuery, // 修改條件
     clearQuery, // 清空查詢條件
@@ -94,7 +94,7 @@ const CardSearch = (props) => {
         />
       </FormControl>
       <FormControl className={classes.formControl}>
-        <Button variant="contained" color="primary" onClick={toogleDialog}>
+        <Button variant="contained" color="primary" onClick={handelSearch}>
           查詢
         </Button>
       </FormControl>
