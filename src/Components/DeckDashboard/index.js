@@ -21,7 +21,6 @@ import { green, red } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import CardSearch from '../CardSearch';
 import ToolBar from '../ToolBar';
 import Decker from '../Decker';
@@ -74,6 +73,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
  */
 const DeckDashBoard = () => {
   const classes = useStyles();
+  const exportRef = React.useRef();
 
   // 查詢條件
   const [queryCondition, setQueryCondition] = React.useState({
@@ -304,11 +304,13 @@ const DeckDashBoard = () => {
             clearQuery={clearQuery}
           />
           <ToolBar
+            ref={exportRef}
             handleClearDecker={handleClearDecker}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={9} lg={9}>
           <Decker
+            ref={exportRef}
             deckList={deckList}
           />
         </Grid>

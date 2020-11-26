@@ -1,3 +1,7 @@
+import React from 'react';
+import {
+  exportComponentAsJPEG,
+} from 'react-component-export-image';
 import {
   makeStyles,
   withStyles,
@@ -29,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
  * ToolBar
  *
  */
-const ToolBar = (props) => {
+const ToolBar = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
   const {
-    handleClearDecker
+    handleClearDecker,
   } = props;
 
   return (
@@ -62,12 +66,13 @@ const ToolBar = (props) => {
           variant="contained"
           color="default"
           startIcon={<GetAppIcon />}
+          onClick={() => exportComponentAsJPEG(ref)}
         >
           下載卡表
         </Button>
       </FormControl>
     </div>
   );
-};
+});
 
 export default ToolBar;

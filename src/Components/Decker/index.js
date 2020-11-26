@@ -47,9 +47,11 @@ const useStyles = makeStyles((theme) => ({
  *
  * @param {*} props
  */
-const Decker = (props) => {
+const Decker = React.forwardRef((props, ref) => {
   const classes = useStyles();
-  const { deckList } = props;
+  const {
+    deckList,
+  } = props;
 
   /**
    * deckInfo
@@ -89,7 +91,7 @@ const Decker = (props) => {
   }, [deckList]);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} ref={ref}>
       <Grid container spacing={3}>
         <Grid item xs={6} sm={6} md={3} lg={3}><Alert severity="info" className={classes.pokemonInfo}>{`寶可夢: ${deckInfo.pokemonCount}`}</Alert></Grid>
         <Grid item xs={6} sm={6} md={3} lg={3}><Alert severity="info" className={classes.trainerInfo}>{`訓練家: ${deckInfo.trainerCount}`}</Alert></Grid>
@@ -126,6 +128,6 @@ const Decker = (props) => {
       </Grid>
     </div>
   );
-};
+});
 
 export default Decker;
