@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     padding: '0px',
   },
+  cardCount: {
+    // fontSize: '24px',
+  },
 }));
 
 /**
@@ -258,8 +261,34 @@ const DeckDashBoard = () => {
    *
    */
   const handleRemove = () => {
-    console.log('handleRemove', handleRemove);
+    // 取得要移除的 index
+    let removeIndex = -1;
+    deckList.forEach((card, index) => {
+      if (selectCard !== null && selectCard.set === card.set && selectCard.id === card.id) {
+        removeIndex = index;
+      }
+    });
+
+    console.log('removeIndex', removeIndex);
   };
+
+  /**
+   * getCardCount
+   * 取得已使用卡片的張數
+   *
+   */
+  const getCardCount = () => {
+    let returnCount = 0;
+
+    if (selectCard !== null && deckList.length > 0) {
+      const tmpCard = deckList.filter((tmp) => tmp.set === selectCard.set && tmp.id === selectCard.id);
+      if (tmpCard !== undefined) {
+        return tmpCard.length;
+      }
+    }
+
+    return 0;
+  }
 
   /**
    * couldClickAdd
@@ -270,10 +299,12 @@ const DeckDashBoard = () => {
     // 牌組只能 60 張
     if (deckList.length === 60) {
       return true;
+    } else if (selectCard !== null && selectCard.maxCount === getCardCount()) {
+      return true;
     } else {
       return false;
     }
-  }, [deckList]);
+  }, [deckList, selectCard]);
 
   /**
    * couldClickRemove
@@ -281,7 +312,11 @@ const DeckDashBoard = () => {
    *
    */
   const couldClickRemove = React.useMemo(() => {
-    return false;
+    if (getCardCount() === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }, [deckList]);
 
   /**
@@ -292,6 +327,15 @@ const DeckDashBoard = () => {
   const handleClearDecker = () => {
     setDeckList([]);
   };
+
+  /**
+   * getUsedCard
+   * 取得已使用卡片的張數
+   *
+   */
+  const getUsedCard = React.useMemo(() => {
+    return getCardCount();
+  }, [selectCard, deckList]);
 
   return (
     <>
@@ -361,6 +405,11 @@ const DeckDashBoard = () => {
                   >
                     <RemoveCircleIcon fontSize="large" style={{ color: red[500] }}/>
                   </IconButton>
+                  <span className={classes.cardCount}>
+                    {
+                      getUsedCard
+                    }
+                  </span>
                   <IconButton
                     aria-label="add"
                     size="large"
