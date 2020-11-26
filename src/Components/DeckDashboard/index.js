@@ -17,11 +17,12 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { green, red } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import CardSearch from '../CardSearch';
 import ToolBar from '../ToolBar';
 import Decker from '../Decker';
+import Slide from '@material-ui/core/Slide';
 
 import CARD_LIST from '../../CardList';
 
@@ -39,7 +40,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  content: {
+    padding: '0px',
+  }
 }));
+
+/**
+ * Transition
+ *
+ */
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 /**
  * DeckDashBoard
@@ -289,13 +301,17 @@ const DeckDashBoard = () => {
 
       <Dialog
         fullScreen
+        TransitionComponent={Transition}
         open={open}
         onClose={toogleDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         {/* <DialogTitle id="alert-dialog-title">查詢結果</DialogTitle> */}
-        <DialogContent align="center">
+        <DialogContent
+          align="center"
+          className={classes.content}
+        >
           {
             (getDeckList.length > 0) ? (
               <>
@@ -378,7 +394,12 @@ const DeckDashBoard = () => {
           }
         </DialogContent>
         <DialogActions>
-          <Button onClick={toogleDialog} color="primary">
+          <Button
+            onClick={toogleDialog}
+            color="primary"
+            variant="contained"
+            startIcon={<ExpandMoreIcon />}
+          >
             關閉
           </Button>
         </DialogActions>
