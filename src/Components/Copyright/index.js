@@ -15,7 +15,7 @@ const Copyright = () => {
       style={{ height: '50px', color: '#000000' }}
     >
       { `${new Date().getFullYear() } © ` }
-      { `Aaron All Right Reserved.` }
+      { `Aaron Lin All Right Reserved.` }
     </Typography>
   );
 }

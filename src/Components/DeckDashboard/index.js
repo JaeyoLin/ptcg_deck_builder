@@ -18,7 +18,9 @@ import { green, red } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
+
 import CardSearch from '../CardSearch';
+import ToolBar from '../ToolBar';
 import Decker from '../Decker';
 
 import CARD_LIST from '../../CardList';
@@ -217,7 +219,6 @@ const DeckDashBoard = () => {
    *
    */
   const handleAdd = () => {
-    console.log('handleAdd', handleAdd);
     setDeckList([
       ...deckList,
       selectCard,
@@ -239,7 +240,12 @@ const DeckDashBoard = () => {
    *
    */
   const couldClickAdd = React.useMemo(() => {
-    return false;
+    // 牌組只能 60 張
+    if (deckList.length === 60) {
+      return true;
+    } else {
+      return false;
+    }
   }, [deckList]);
 
   /**
@@ -251,6 +257,15 @@ const DeckDashBoard = () => {
     return false;
   }, [deckList]);
 
+  /**
+   * handleClearDecker
+   * 清空卡表
+   *
+   */
+  const handleClearDecker = () => {
+    setDeckList([]);
+  };
+
   return (
     <>
       <Grid container spacing={3}>
@@ -260,6 +275,9 @@ const DeckDashBoard = () => {
             queryCondition={queryCondition}
             handleChangeQuery={handleChangeQuery}
             clearQuery={clearQuery}
+          />
+          <ToolBar
+            handleClearDecker={handleClearDecker}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={9} lg={9}>
