@@ -317,9 +317,9 @@ const DeckDashBoard = () => {
       </Grid>
 
       <Dialog
-        // fullScreen
-        fullWidth
-        maxWidth={false}
+        fullScreen
+        // fullWidth
+        // maxWidth={false}
         TransitionComponent={Transition}
         open={open}
         onClose={toogleDialog}
