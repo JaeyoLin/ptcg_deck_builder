@@ -1,5 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  withStyles,
+} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
@@ -42,8 +45,20 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     padding: '0px',
-  }
+  },
 }));
+
+/**
+ * StyledSelect
+ *
+ */
+const StyledSelect = withStyles({
+  select: {
+    "&.MuiSelect-select": {
+      paddingRight: '0px',
+    },
+  },
+})(Select);
 
 /**
  * Transition
@@ -300,7 +315,9 @@ const DeckDashBoard = () => {
       </Grid>
 
       <Dialog
-        fullScreen
+        // fullScreen
+        fullWidth
+        maxWidth={false}
         TransitionComponent={Transition}
         open={open}
         onClose={toogleDialog}
@@ -316,7 +333,7 @@ const DeckDashBoard = () => {
             (getDeckList.length > 0) ? (
               <>
                 <FormControl className={classes.formControl}>
-                  <Select
+                  <StyledSelect
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={selectCard}
@@ -331,7 +348,7 @@ const DeckDashBoard = () => {
                         );
                       })
                     }
-                  </Select>
+                  </StyledSelect>
                 </FormControl>
                 <div>
                   <IconButton
