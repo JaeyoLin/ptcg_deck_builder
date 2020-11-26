@@ -288,6 +288,7 @@ const DeckDashBoard = () => {
       </Grid>
 
       <Dialog
+        fullScreen
         open={open}
         onClose={toogleDialog}
         aria-labelledby="alert-dialog-title"
@@ -348,7 +349,7 @@ const DeckDashBoard = () => {
                   <div>
                     {
                       (selectCard !== null) && (
-                        <img src={selectCard.imgSrc} width="70%" />
+                        <img src={selectCard.imgSrc} width="100%" />
                       )
                     }
                   </div>
