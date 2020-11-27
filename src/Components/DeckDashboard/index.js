@@ -287,6 +287,7 @@ const DeckDashBoard = () => {
 
     if (selectCard !== null && deckList.length > 0) {
       const tmpCard = deckList.filter((tmp) => tmp.set === selectCard.set && tmp.id === selectCard.id);
+      // const tmpCard = deckList.filter((tmp) => tmp.name === selectCard.name);
       if (tmpCard !== undefined) {
         return tmpCard.length;
       }
@@ -367,15 +368,12 @@ const DeckDashBoard = () => {
 
       <Dialog
         fullScreen
-        // fullWidth
-        // maxWidth={false}
         TransitionComponent={Transition}
         open={open}
         onClose={toogleDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {/* <DialogTitle id="alert-dialog-title">查詢結果</DialogTitle> */}
         <DialogContent
           align="center"
           className={classes.content}
