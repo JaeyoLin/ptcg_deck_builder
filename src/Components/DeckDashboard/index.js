@@ -17,7 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import { green, red } from '@material-ui/core/colors';
+import { green, red, blueGrey } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -269,7 +269,12 @@ const DeckDashBoard = () => {
       }
     });
 
-    console.log('removeIndex', removeIndex);
+    if (removeIndex > -1) {
+      const newDeckList = deckList.filter((card, index) => {
+        return index !== removeIndex;
+      });
+      setDeckList(newDeckList);
+    }
   };
 
   /**
@@ -403,7 +408,13 @@ const DeckDashBoard = () => {
                     disabled={couldClickRemove}
                     onClick={handleRemove}
                   >
-                    <RemoveCircleIcon fontSize="large" style={{ color: red[500] }}/>
+                    {
+                      (couldClickRemove) ? (
+                        <RemoveCircleIcon fontSize="large" />
+                      ) : (
+                        <RemoveCircleIcon fontSize="large" style={{ color: red[500] }} />
+                      )
+                    }
                   </IconButton>
                   <span className={classes.cardCount}>
                     {
@@ -416,7 +427,13 @@ const DeckDashBoard = () => {
                     disabled={couldClickAdd}
                     onClick={handleAdd}
                   >
-                    <AddCircleIcon fontSize="large" style={{ color: green[500] }} />
+                    {
+                      (couldClickAdd) ? (
+                        <AddCircleIcon fontSize="large" />
+                      ) : (
+                        <AddCircleIcon fontSize="large" style={{ color: green[500] }} />
+                      )
+                    }
                   </IconButton>
                 </div>
                 <div className={classes.cardContainer}>
@@ -427,7 +444,13 @@ const DeckDashBoard = () => {
                       disabled={couldClickPrev}
                       onClick={handlePrevCard}
                     >
-                      <ChevronLeftIcon fontSize="large" />
+                      {
+                        (couldClickPrev) ? (
+                          <ChevronLeftIcon fontSize="large" />
+                        ) : (
+                          <ChevronLeftIcon fontSize="large" style={{ color: blueGrey[900] }} />
+                        )
+                      }
                     </IconButton>
                   </div>
                   <div>
@@ -444,7 +467,13 @@ const DeckDashBoard = () => {
                       disabled={couldClickNext}
                       onClick={handleNextCard}
                     >
-                      <ChevronRightIcon fontSize="large" />
+                      {
+                        (couldClickNext) ? (
+                          <ChevronRightIcon fontSize="large" />
+                        ) : (
+                          <ChevronRightIcon fontSize="large" style={{ color: blueGrey[900] }} />
+                        )
+                      }
                     </IconButton>
                   </div>
                 </div>
