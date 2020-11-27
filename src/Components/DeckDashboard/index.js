@@ -297,6 +297,24 @@ const DeckDashBoard = () => {
   }
 
   /**
+   * getSameNameCardCount
+   * 取得同名卡的張數
+   *
+   */
+  const getSameNameCardCount = () => {
+    let returnCount = 0;
+
+    if (selectCard !== null && deckList.length > 0) {
+      const tmpCard = deckList.filter((tmp) => tmp.name === selectCard.name);
+      if (tmpCard !== undefined) {
+        return tmpCard.length;
+      }
+    }
+
+    return 0;
+  }
+
+  /**
    * couldClickAdd
    * 是否可以點選加入
    *
@@ -305,7 +323,7 @@ const DeckDashBoard = () => {
     // 牌組只能 60 張
     if (deckList.length === 60) {
       return true;
-    } else if (selectCard !== null && selectCard.maxCount === getCardCount()) {
+    } else if (selectCard !== null && selectCard.maxCount === getSameNameCardCount()) {
       return true;
     } else {
       return false;
